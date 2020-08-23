@@ -93,9 +93,11 @@
       </div>
 
       <div class="page-2" id="page-2">
+        <audio id="player" loop src="/assets/Minutes Til Midnight - Gospel Of The Throttle.mp3"></audio>
+        <div class="light"></div>
         <div class="oscilograph">
           <svg class="sine-wave">  
-            <g>    
+            <g class="line-group">    
               <line id="line" x1="0" x2="100%" />
               <polyline id="wave" />
             </g>  
@@ -103,25 +105,24 @@
         </div>
         <div class="main-stage">
           <img class="lemon" src="assets/lemon-citrina.svg" alt="">
+          <svg class="lemon-holes">
+	          <ellipse id="first-hole" cx="60" cy="66" rx="4" ry="3.5"/>
+            <ellipse id="second-hole" cx="180" cy="95" rx="4" ry="3.5"/>
+          </svg>
           <div class="lemon-shadow"></div>
-          <svg id="svg" viewBox="0 0 400 400">
+          <svg id="stage" viewBox="0 0 400 400">
 
             <defs>
-              <!-- <circle class="handle" r="10" /> -->
-              <!-- <polyline class="handle" points="0,0 0,50" /> -->
               <path class="handle" d="M4.5,0H0.4C0.2,0,0,0.3,0,0.7v1.4c0,1.2,0.5,2.1,1.1,2.1h0v26c0,0.1,0,0.2,0,0.2l0.9,4.5c0.1,0.3,0.2,0.5,0.4,0.5
               c0.2,0,0.3-0.2,0.4-0.5l0.9-4.5c0-0.1,0-0.2,0-0.2v-26h0c0.6,0,1.1-0.9,1.1-2.1V0.7C4.9,0.3,4.7,0,4.5,0z"/>
-              <!-- <image class="handle" href="/assets/nail.svg" height="50px"> -->
               <circle class="marker" r="4" />
             </defs>
-            
-            <polyline id="star" points="478,235 478,135 518,135 518,235" />  
+            <polyline id="wires" points="478,235 478,135 518,135 518,235" />  
             <g id="marker-layer"></g>
             <g id="handle-layer" transform="matrix(-4,0,0,1,0,50)"></g>
-            <g class="lemon-holes">
-              <ellipse id="first-hole" class="st19" cx="239" cy="352" rx="3" ry="2.5"/>
-	            <ellipse id="second-hole" cx="318" cy="371" rx="3" ry="2.5"/>
-            </g>
+            <image href="assets/bulb.svg" height="150" x="448" y="15" />
+            <circle class="bulb-light" r="28" cx="497" cy="80"></circle>
+            <polyline class="bulb-wire" points="484,79 492,77 502,77 510,79"/>
           </svg>
         </div>
       </div>

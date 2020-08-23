@@ -165,6 +165,16 @@ $cogs: 1, 2, 3, 4;
   height: 100%;
   display: none;
 
+  .light {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 0.3;
+    z-index: 4;
+  }
+
   .oscilograph {
     position: absolute;
     left: 10px;
@@ -174,10 +184,11 @@ $cogs: 1, 2, 3, 4;
     padding: 30px;
     background-color: #525252;
     border-radius: 10px 10px 0 0;
+    z-index: 1002;
 
     &--active {
 
-      polyline {
+      .sine-wave polyline {
         opacity: 1;
       }
 
@@ -222,7 +233,7 @@ $cogs: 1, 2, 3, 4;
   }
 
   .lemon {
-    height: 259px;
+    height: 250px;
     position: absolute;
     left: 50%;
     top: 50%;
@@ -239,76 +250,96 @@ $cogs: 1, 2, 3, 4;
     top: calc(50% + 215px);
     box-shadow: 0px 0px 30px 5px rgba(0,0,0,0.75);
   }
+
+  #stage {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 65%;
+    opacity: 0;
+    visibility: hidden;
+    z-index: 1002;
+  
+    g {
+      transform: matrix(1,0,0,1,0,0);
+    }
+  
+    #handle-layer {
+      transform: matrix(0.995, 0, 0, 1, 0, 0);
+    }
+  }
+  
+  #wires {
+    margin-top: 50px;
+    stroke: #332;
+    stroke-width: 2;
+    stroke-linejoin: round;
+    fill: none;
+  }
+  
+  .handle {
+  
+    fill: #fff;
+    fill-opacity: 1;
+    stroke-width: 1;
+    stroke: #fff;
+    position: relative;
+    left: -4px;
+    top: -10px;
+  
+    // path {
+    //   transform: scale(0.1);
+    // }
+  
+    &--copper {
+      stroke: coral;
+      fill: coral;
+    }
+  
+    &--zinc {
+      stroke: lightgray;
+      fill: lightgray;
+    }
+  }
+  
+  #handle-layer {
+    transform: matrix(matrix(-3.5,0,0,1,478,235));
+  }
+  
+  .marker {
+    fill: none;
+    stroke: none;
+    pointer-events: none;
+  }
+  
+  .lemon-holes {
+    height: 250px;
+    width: 250px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    z-index: 3;
+    
+    ellipse{
+      opacity: 0;
+      fill: #f9da37;
+      mix-blend-mode: hard-light;
+    }
+  }
+
+  .bulb-light {
+    opacity: 0;
+    fill: rgba(255,254,224,0.1);
+  }
+
+  .bulb-wire {
+    opacity: 0;
+    stroke: rgba(255, 238, 5, 0.8);
+    fill: none;
+  }
 }
 
 .page-3 {
   display: none;
-}
-
-#svg {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 65%;
-  opacity: 0;
-  visibility: hidden;
-  z-index: 3;
-
-  g {
-    transform: matrix(1,0,0,1,0,0);
-  }
-
-  #handle-layer {
-    transform: matrix(0.995, 0, 0, 1, 0, 0);
-  }
-}
-
-#star {
-  margin-top: 50px;
-  stroke: #29e;
-  stroke-width: 2;
-  stroke-linejoin: round;
-  fill: none;
-}
-
-.handle {
-
-  fill: #fff;
-  fill-opacity: 1;
-  stroke-width: 1;
-  stroke: #fff;
-  position: relative;
-  left: -4px;
-  top: -10px;
-
-  // path {
-  //   transform: scale(0.1);
-  // }
-
-  &--copper {
-    stroke: coral;
-    fill: coral;
-  }
-
-  &--zinc {
-    stroke: lightgray;
-    fill: lightgray;
-  }
-}
-
-#handle-layer {
-  transform: matrix(matrix(-3.5,0,0,1,478,235));
-}
-
-.marker {
-  fill: tomato;
-  stroke: tomato;
-  pointer-events: none;
-}
-
-.lemon-holes ellipse{
-  opacity: 0;
-  fill: #f9da37;
-  mix-blend-mode: hard-light;
 }

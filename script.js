@@ -43,6 +43,8 @@ function showFirstPage() {
 function firstPage() {
   moveToNavItem(0);
   switch (currentPage) {
+    case 1:
+      break;
     case 2:
       page2.stop(() => {
         showFirstPage();
@@ -72,6 +74,8 @@ function secondPage() {
       page1.stop(() => {
         showSecondPage();
       });
+      break;
+    case 2:
       break;
   
     default:

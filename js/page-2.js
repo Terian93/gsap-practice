@@ -21,10 +21,14 @@ gsap.set('.lemon-shadow', {
   x: 50
 })
 
+gsap.set('.lemon-holes', {
+  y: -900
+});
+
 
 //#region oscilograph animation
 TweenLite.defaultEase = Sine.easeInOut;
-TweenLite.set("g", { y: 50 });
+TweenLite.set("g.line-group", { y: 50 });
 
 var svg   = document.querySelector("svg");
 var wave  = document.querySelector("#wave");
@@ -49,24 +53,28 @@ for (var i = 0; i < segments; i++) {
 //#endregion
 
 //#region wires
-var star = document.querySelector("#star");
+var wires = document.querySelector("#wires");
 var markerDef = document.querySelector("defs .marker");
 var handleDef = document.querySelector("defs .handle");
 var markerLayer = document.querySelector("#marker-layer");
 var handleLayer = document.querySelector("#handle-layer");
+var oscilograph = document.querySelector(".oscilograph");
+var player = document.getElementById("player");
+player.volume = 1;
+
 
 var points = [];
-var snapPoints = [{x: 238, y: 312}, {x: 317.5, y: 332}]
-var numPoints = star.points.numberOfItems;
+var snapPoints = [{x: 237, y: 312}, {x: 314, y: 330}]
+var numPoints = wires.points.numberOfItems;
 const dropPositions = document.getElementsByClassName('marker--bindable');
-const contactsPositions = {
+let contactsPositions = {
   zinc: -1,
   copper: -1
 }
 const draggables = [];
 
 for (var i = 0; i < numPoints; i++) {  
-  var point = star.points.getItem(i);
+  var point = wires.points.getItem(i);
   points[i] = {x:point.x, y:point.y};
   createHandle(point, i);
 }
@@ -74,7 +82,7 @@ for (var i = 0; i < numPoints; i++) {
 createClone(markerDef, markerLayer, snapPoints[0]).classList.add('marker--bindable');
 createClone(markerDef, markerLayer, snapPoints[1]).classList.add('marker--bindable');
 
-gsap.set("#svg", { autoAlpha: 1 });
+gsap.set("#stage", { autoAlpha: 1 });
 
 function createHandle(point, index) {
   var marker = createClone(markerDef, markerLayer, point);
@@ -104,6 +112,8 @@ function createHandle(point, index) {
     function moveAction(position) {
       point.x = this.x;
       point.y = this.y + 10;
+      oscilograph.classList.remove('oscilograph--active');
+      disableAllLights();
     }
 
   }
@@ -119,7 +129,8 @@ function checkIfSnapped() {
     contactsPositions.zinc >= 0 && 
     contactsPositions.copper >= 0) {
     console.log('hit');
-    
+    oscilograph.classList.add('oscilograph--active');
+    enableLights();
   }
 }
 
@@ -156,13 +167,64 @@ function createClone(node, parent, point) {
 
 let lemonTimeline = gsap.timeline({onReverseComplete: ()=>console.log('cinemaReverseEnd')});
 lemonTimeline
-  .to('.oscilograph', 1, {y: 0, duration: 2, }, 1)
-  .to('.lemon', 1, {y: 0, duration: 6, }, 2)
-  .to('.lemon-shadow', 1, {opacity: 1, width: "180px", x: 0, duration: 10}, 2)
+  .fromTo('.page-2', 1, {backgroundColor: "#fff"}, {backgroundColor: "#aaa", duration: 5}, 1)
+  .to('.oscilograph', 1, {y: 0, duration: 2, }, 2)
+  .to('.lemon', 1, {y: 0, duration: 6, }, 3)
+  .to('.lemon-shadow', 1, {opacity: 1, width: "180px", x: 0, duration: 6}, 3)
+  .to('.lemon-holes', 1, {
+    y: 0,
+    duration: 6
+  }, 3)
+  .fromTo('#stage', 1, {
+    x: 780
+  }, {
+    x: 0,
+    duration: 6
+  }, 4);
+  
+const partyLightsTimeline = gsap.timeline({repeat: -1});
+partyLightsTimeline
+  .fromTo('.light', 3, {backgroundColor: "#ff7f00"}, {backgroundColor: "#9400d3", duration: 0.5}, 1)
+  .to('.light', 3, {backgroundColor: "#00ff00", duration: 1}, 2)
+  .to('.light', 3, {backgroundColor: "#ff0000", duration: 1}, 3)
+  .to('.light', 3, {backgroundColor: "#4b0082", duration: 1}, 4)
+  .to('.light', 3, {backgroundColor: "#ffff00", duration: 1}, 5)
+  .to('.light', 3, {backgroundColor: "#0000ff", duration: 1}, 6)
+  .to('.light', 3, {backgroundColor: "#ff7f00", duration: 0.5}, 7)
+
+gsap.set('.light', {clearProps: "all"})
+
+let lightsEnabled = true;
+
+function enableLights() {
+  partyLightsTimeline.play();
+  lightsEnabled = true;
+  player.play();
+  gsap.set('.bulb-light', {opacity: 0.8});
+  gsap.set('.bulb-wire', {opacity: 0.8});
+}
+
+function disableAllLights() {
+  if (lightsEnabled) {
+    partyLightsTimeline.pause();
+    player.pause();
+    gsap.set('.light', {clearProps: "all"});
+    gsap.set('.page-2', {backgroundColor: "#aaa"});
+    gsap.set('.bulb-light', {opacity: 0});
+    gsap.set('.bulb-wire', {opacity: 0});
+    lightsEnabled = false;
+  }
+}
 
 let timeout;
 
 function start() {
+  contactsPositions = {
+    zinc: -1,
+    copper: -1
+  };
+  disableAllLights();
+  oscilograph.classList.remove('oscilograph--active');
   lemonTimeline.reversed(false);
   lemonTimeline.time(0);
   gsap.set('#first-hole', {
@@ -181,21 +243,48 @@ function start() {
     x:518,
     y:235
   })
-  star.points[0].x = 478;
-  star.points[0].y = 235;
-  star.points[3].x = 518;
-  star.points[3].y = 235;
+  wires.points[0].x = 478;
+  wires.points[0].y = 235;
+  wires.points[3].x = 518;
+  wires.points[3].y = 235;
   lemonTimeline.play();
   clearTimeout(timeout);
 }
 
 function stop(callback) {
-  lemonTimeline.reversed(true);
-  clearTimeout(timeout);
-  timeout = setTimeout(() => {
-    callback();
+  disableAllLights();
+  let wireWrapper = gsap.timeline({onComplete: reversePageWraping});
+  wireWrapper.to('.handle--zinc', 1, {
+    x:478,
+    y:235,
+    duration: 1
+  }, 1);
+  wireWrapper.to('.handle--copper', 1, {
+    x:518,
+    y:235,
+    duration: 1
+  }, 1);
+  wireWrapper.to(wires.points[0], 1, {
+    x: 478,
+    y: 235,
+    duration: 1,
+  }, 1);
+  wireWrapper.to(wires.points[3], 1, {
+    x: 518,
+    y: 235,
+    duration: 1,
+  }, 1);
+  wireWrapper.play();
+
+  function reversePageWraping() {
+    oscilograph.classList.remove('oscilograph--active');
+    lemonTimeline.reversed(true);
     clearTimeout(timeout);
-  }, lemonTimeline.time() * 1000)
+    timeout = setTimeout(() => {
+      callback();
+      clearTimeout(timeout);
+    }, lemonTimeline.time() * 1000)
+  }
 }
 
 export default {start, stop}
