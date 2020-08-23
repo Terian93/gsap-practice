@@ -340,7 +340,7 @@ main {
 
 .page-2 .bulb-light {
   opacity: 0;
-  fill: rgba(255, 254, 224, 0.1);
+  fill: rgba(255, 254, 224, 0.2);
 }
 
 .page-2 .bulb-wire {

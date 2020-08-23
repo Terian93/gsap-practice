@@ -60,7 +60,7 @@ var markerLayer = document.querySelector("#marker-layer");
 var handleLayer = document.querySelector("#handle-layer");
 var oscilograph = document.querySelector(".oscilograph");
 var player = document.getElementById("player");
-player.volume = 1;
+player.volume = 0.8;
 
 
 var points = [];
@@ -181,7 +181,8 @@ lemonTimeline
     x: 0,
     duration: 6
   }, 4);
-  
+ 
+//#region lights
 const partyLightsTimeline = gsap.timeline({repeat: -1});
 partyLightsTimeline
   .fromTo('.light', 3, {backgroundColor: "#ff7f00"}, {backgroundColor: "#9400d3", duration: 0.5}, 1)
@@ -200,8 +201,8 @@ function enableLights() {
   partyLightsTimeline.play();
   lightsEnabled = true;
   player.play();
-  gsap.set('.bulb-light', {opacity: 0.8});
-  gsap.set('.bulb-wire', {opacity: 0.8});
+  gsap.set('.bulb-light', {opacity: 1});
+  gsap.set('.bulb-wire', {opacity: 1});
 }
 
 function disableAllLights() {
@@ -215,10 +216,12 @@ function disableAllLights() {
     lightsEnabled = false;
   }
 }
+//#endregion
 
 let timeout;
 
 function start() {
+  player.currentTime = 0;
   contactsPositions = {
     zinc: -1,
     copper: -1
