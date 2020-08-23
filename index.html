@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="style.css">
+  
+  <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/all.js"></script>
+  <script
+  src="https://code.jquery.com/jquery-3.5.1.min.js"
+  integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+  crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.0.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.2.6/CSSRulePlugin.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.2.6/MotionPathPlugin.min.js"></script>
+  <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/16327/CustomEase.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="content">
+    <aside class="navigation">
+      <nav>
+        <div class="nav-arrow">
+          <i class="fas fa-arrow-left"></i>
+        </div>
+        <ul>
+          <li class="nav-item" onclick="firstPage()">Cinema</li>
+          <li class="nav-item" onclick="secondPage()">Lemon</li>
+          <li class="nav-item" onclick="thirdPage()">Freestyle</li>
+        </ul>
+        
+      </nav>
+    </aside>
+    <main>
+      <div class="page-1" id="page-1">
+        <div class="cog-1 cog">
+          <i class="fas fa-cog"></i>
+        </div>
+        <div class="cog-2 cog">
+          <i class="fas fa-cog"></i>
+        </div>
+        <div class="cog-3 cog">
+          <i class="fas fa-cog"></i>
+        </div>
+        <div class="cog-4 cog">
+          <i class="fas fa-cog"></i>
+        </div>
+        <section class="page-content">
+          <video id="film" src="/assets/countdown.mp4"></video>
+        </section>
+        <div class="seats">
+          <div class="seats-row seats-row-1">
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+          </div>
+          <div class="seats-row  seats-row-2">
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+          </div>
+          <div class="seats-row  seats-row-3">
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+            <div class="seat"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="page-2" id="page-2">
+        <div class="oscilograph">
+          <svg class="sine-wave">  
+            <g>    
+              <line id="line" x1="0" x2="100%" />
+              <polyline id="wave" />
+            </g>  
+          </svg>
+        </div>
+        <div class="main-stage">
+          <img class="lemon" src="assets/lemon-citrina.svg" alt="">
+          <div class="lemon-shadow"></div>
+          <svg id="svg" viewBox="0 0 400 400">
+
+            <defs>
+              <!-- <circle class="handle" r="10" /> -->
+              <!-- <polyline class="handle" points="0,0 0,50" /> -->
+              <path class="handle" d="M4.5,0H0.4C0.2,0,0,0.3,0,0.7v1.4c0,1.2,0.5,2.1,1.1,2.1h0v26c0,0.1,0,0.2,0,0.2l0.9,4.5c0.1,0.3,0.2,0.5,0.4,0.5
+              c0.2,0,0.3-0.2,0.4-0.5l0.9-4.5c0-0.1,0-0.2,0-0.2v-26h0c0.6,0,1.1-0.9,1.1-2.1V0.7C4.9,0.3,4.7,0,4.5,0z"/>
+              <!-- <image class="handle" href="/assets/nail.svg" height="50px"> -->
+              <circle class="marker" r="4" />
+            </defs>
+            
+            <polyline id="star" points="478,235 478,135 518,135 518,235" />  
+            <g id="marker-layer"></g>
+            <g id="handle-layer" transform="matrix(-4,0,0,1,0,50)"></g>
+            <g class="lemon-holes">
+              <ellipse id="first-hole" class="st19" cx="239" cy="352" rx="3" ry="2.5"/>
+	            <ellipse id="second-hole" cx="318" cy="371" rx="3" ry="2.5"/>
+            </g>
+          </svg>
+        </div>
+      </div>
+
+      <div class="page-3" id="page-3">
+      </div>
+    </main>
+  </div>
+  <script type="module" src="./script.js"></script>
+</body>
+</html>
