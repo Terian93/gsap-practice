@@ -64,7 +64,7 @@ player.volume = 0.8;
 
 
 var points = [];
-var snapPoints = [{x: 237, y: 312}, {x: 314, y: 330}]
+var snapPoints = [{x: 238, y: 312}, {x: 317, y: 330}]
 var numPoints = wires.points.numberOfItems;
 const dropPositions = document.getElementsByClassName('marker--bindable');
 let contactsPositions = {

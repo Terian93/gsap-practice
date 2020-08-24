@@ -1,8 +1,14 @@
 import CustomEase from "../gsap/CustomEase.js";
-gsap.registerPlugin(MotionPathPlugin, CSSRule, CustomEase);
+import ScrollTrigger from "../gsap/ScrollTrigger.js";
+gsap.registerPlugin(MotionPathPlugin, CSSRule, CustomEase, ScrollTrigger);
+gsap.registerPlugin(ScrollTrigger);
 import page1 from './js/page-1.js';
 import page2 from './js/page-2.js';
 import page3 from './js/page-3.js';
+
+document.getElementById('page-1').style.display='none';
+document.getElementById('page-2').style.display='none';
+document.getElementById('page-3').style.display='none';
 
 //Default position
 gsap.set('.nav-arrow', {
@@ -50,6 +56,12 @@ function firstPage() {
         showFirstPage();
       });
       break;
+
+    case 3:
+      page3.stop(() => {
+        showFirstPage();
+      });
+      break;
   
     default:
       showFirstPage();
@@ -75,7 +87,14 @@ function secondPage() {
         showSecondPage();
       });
       break;
+
     case 2:
+      break;
+    
+    case 3:
+      page3.stop(() => {
+        showSecondPage();
+      });
       break;
   
     default:
@@ -86,10 +105,12 @@ function secondPage() {
 }
 
 function showThirdPage() {
-  //page3.start();
+  page3.start();
   document.getElementById('page-1').style.display='none';
   document.getElementById('page-2').style.display='none';
   document.getElementById('page-3').style.display='block';
+  // document.getElementById('page-3').scrollTop = 0;
+  document.body.scrollTop = 0;
 }
 
 function thirdPage() {
@@ -105,6 +126,9 @@ function thirdPage() {
       page2.stop(() => {
         showThirdPage();
       });
+      break;
+
+    case 3:
       break;
   
     default:

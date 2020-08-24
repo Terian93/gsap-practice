@@ -11,7 +11,7 @@
   src="https://code.jquery.com/jquery-3.5.1.min.js"
   integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
   crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.0.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.0/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.2.6/CSSRulePlugin.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.2.6/MotionPathPlugin.min.js"></script>
   <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/16327/CustomEase.min.js"></script>
@@ -27,7 +27,7 @@
         <ul>
           <li class="nav-item" onclick="firstPage()">Cinema</li>
           <li class="nav-item" onclick="secondPage()">Lemon</li>
-          <li class="nav-item" onclick="thirdPage()">Freestyle</li>
+          <li class="nav-item" onclick="thirdPage()">Gallery</li>
         </ul>
         
       </nav>
@@ -128,6 +128,48 @@
       </div>
 
       <div class="page-3" id="page-3">
+        <div class="dots">
+        </div>
+        <div class="tool-tips">
+          <div class="tool-tip">
+            Start
+          </div>
+          <div class="tool-tip">
+            Welcome page
+          </div>
+          <div class="tool-tip">
+            Blank
+          </div>
+          <div class="tool-tip">
+            Blank
+          </div>
+        </div>
+        <div id="panelWrap">
+          <section class="white-space slide">
+            <p class="instruction">Scroll to navigate</p>
+            <svg class="mouse-icon" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+              viewBox="0 0 192.52 248.87" style="enable-background:new 0 0 192.52 248.87;" xml:space="preserve"
+            >
+              <style type="text/css">
+                .st0{fill:none;stroke:#231F20;stroke-width:19;stroke-linecap:round;}
+              </style>
+              <g id="Layer_2">
+                <path class="st0" d="M159.7,79.08c0,46.57,0,79.58,0,79.58s-3.61,56.2-63.43,58.55c-59.83-2.35-63.43-58.55-63.43-58.55
+                  s0-19.71,0-79.58c0-51.26,63.43-47.35,63.43-47.35S159.7,32.51,159.7,79.08z"/>
+              </g>
+              <g id="Layer_3">
+                <line id="scroll-wheel" class="st0" x1="96.26" y1="79.08" x2="96.26" y2="115.47"/>
+              </g>
+            </svg>
+          </section>
+          <section class="slide"></section>
+          <section class="welcome-section slide">
+            <h1 class="header">Free your scroll...</h1>
+            <p class="header-ending">to the new possibilities</p>
+            <div class="testing"></div>
+          </section>
+          <section class="slide"></section>
+        </div>
       </div>
     </main>
   </div>
