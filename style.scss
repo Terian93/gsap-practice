@@ -479,7 +479,7 @@ $cogs: 1, 2, 3, 4;
     padding: 5px;
     position: fixed;
     top: 15px;
-    right: 60px;
+    right: 30px;
     z-index: 2000;
     border-radius: 15px;
     background: transparent;
@@ -489,11 +489,13 @@ $cogs: 1, 2, 3, 4;
     overflow-x: hidden;
     overflow-y: scroll;
     position: relative;
+    top: -10px;
+    height: calc(100vh + 20px);
 
     .photo-gallery__wrapper {
       width: calc(5 * (100vw - 200px));
 
-      height: 100vh;
+      height: 100%;
       display: flex;
       flex-wrap: nowrap;
     }
@@ -508,6 +510,7 @@ $cogs: 1, 2, 3, 4;
 
     .photo-gallery__header {
       position: relative;
+      background: #fff;
 
       h2 {
         position: absolute;

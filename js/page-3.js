@@ -169,6 +169,7 @@ gsap.to(photoSlides, {
 function resetSections() {
   activeSlide = 0;
   oldSlide = 0;
+  gsap.set('.navigation-wrapper', {backgroundColor: 'transparent'});
   gsap.set(container, { y: offsets[activeSlide]});
   slides.forEach(slide =>  {
     slide.scrollTop = 0;
