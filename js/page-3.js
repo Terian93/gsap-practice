@@ -48,7 +48,6 @@ function dotHover() {
 
 function slideAnim(e) {
   const currentSlide = slides[activeSlide];
-  console.log(e);
   if (
     e.deltaY > 0 && currentSlide.scrollHeight - currentSlide.scrollTop === currentSlide.clientHeight ||
     e.deltaY < 0 && currentSlide.scrollTop === 0  ||
@@ -72,7 +71,11 @@ function slideAnim(e) {
     if (oldSlide === activeSlide) {
       return;
     }
-  
+    if (activeSlide >= 2) {
+      gsap.to('.navigation-wrapper', {backgroundColor: '#fff', delay: dur});
+    } else {
+      gsap.set('.navigation-wrapper', {backgroundColor: 'transparent'});
+    }
     gsap.to(container, dur, { y: offsets[activeSlide], ease:"power2.inOut", onUpdate:tweenDot });
   }
   
@@ -88,7 +91,6 @@ function tweenDot() {
   });
   for (let index = 0; index < slides.length; index++) {
     if (index === activeSlide) {
-      console.log(toolTips);
       toolTips[index].classList.add('tool-tip--active');
     } else {
       toolTips[index].classList.remove('tool-tip--active');
@@ -117,8 +119,7 @@ scrollWheelTimeline
 //#region welcome section
 const welcomeGradient = gsap.timeline({
   scrollTrigger: {
-    trigger: '.welcome-section',
-    start: "top center",
+    trigger: '.header',
     toggleActions: "play none none none",
   },
 });
@@ -142,7 +143,37 @@ welcomeGradient
   }, 2);
 //#endregion
 
+//#region photo gallery
+let offsetWidth = 0;
+let photoSlides = gsap.utils.toArray('.photo-gallery__slide');
+
+gsap.to(photoSlides, {
+  xPercent: -100 * (photoSlides.length - 1),
+  ease: "none",
+  scrollTrigger: {
+    trigger: ".photo-gallery__wrapper",
+    pin: true,
+    scrub: 1,
+    scroller: '.photo-gallery',
+    snap: 1 / (photoSlides.length - 1),
+    end: () => {
+      if (document.querySelector(".photo-gallery__wrapper").offsetWidth > 0) {
+        offsetWidth = document.querySelector(".photo-gallery__wrapper").offsetWidth;
+      }
+      return "+=" + offsetWidth;
+    }
+  }
+})
+//#endregion
+
 function resetSections() {
+  activeSlide = 0;
+  oldSlide = 0;
+  gsap.set(container, { y: offsets[activeSlide]});
+  slides.forEach(slide =>  {
+    slide.scrollTop = 0;
+  });
+  tweenDot();
   gsap.set('.welcome-section', {
     background: 'linear-gradient(37deg, rgba(2,0,36,1) 85%, rgba(9,83,121,1) 88%, rgba(0,212,255,1) 100%)',
   })
@@ -153,19 +184,11 @@ let timeout;
 
 function start() {
   resetSections();
-  // filmTimeline.reversed(false);
-  // filmTimeline.play();
-  // clearTimeout(timeout);
 }
 
 function stop(callback) {
+  resetSections();
   callback();
-  // filmTimeline.reversed(true);
-  // clearTimeout(timeout);
-  // timeout = setTimeout(() => {
-  //   callback();
-  //   clearTimeout(timeout);
-  // },filmTimeline.time() * 1000)
 }
 
 export default {start, stop}

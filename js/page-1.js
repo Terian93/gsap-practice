@@ -95,7 +95,6 @@
     .to('.page-content', {backgroundColor: '#000000', duration: 2}, 11)
     .set('#film', {opacity: 1})
     .pause();
-  console.log('test');
 
 let timeout;
 

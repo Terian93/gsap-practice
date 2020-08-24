@@ -109,8 +109,7 @@ function showThirdPage() {
   document.getElementById('page-1').style.display='none';
   document.getElementById('page-2').style.display='none';
   document.getElementById('page-3').style.display='block';
-  // document.getElementById('page-3').scrollTop = 0;
-  document.body.scrollTop = 0;
+  ScrollTrigger.refresh();
 }
 
 function thirdPage() {
