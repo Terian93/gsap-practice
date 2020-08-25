@@ -166,6 +166,62 @@ gsap.to(photoSlides, {
 })
 //#endregion
 
+//#region car scrub
+gsap.set('.car-scrub__car-img', {
+  y: '-200px',
+  rotate: -90,
+  xPercent: 50
+});
+
+const carScrub = gsap.timeline({
+  scrollTrigger: {
+    trigger: ".car-scrub__spacer",
+    scrub: true,
+    start: "top top",
+    end: "bottom bottom",
+    scroller: '.car-scrub',
+  },
+})
+
+carScrub
+.to('.car-scrub__car-img', {
+  y: '100vh',
+  x: '20vw',
+  rotate: -135,
+  ease: "none",
+}, 0)
+.to('.car-scrub__car-img', {
+  y: '200vh',
+  x: '30vw',
+  rotate: -90,
+  ease: "none",
+})
+.to('.car-scrub__car-img', {
+  y: '300vh',
+  x: '20vw',
+  rotate: -45,
+  ease: "none",
+})
+.to('.car-scrub__car-img', {
+  y: '400vh',
+  x: '10vw',
+  rotate: -90,
+  ease: "none",
+})
+.to('.car-scrub__car-img', {
+  y: '500vh',
+  x: '20vw',
+  rotate: -135,
+  ease: "none",
+})
+.to('.car-scrub__car-img', {
+  y: '620vh',
+  x: '30vw',
+  rotate: -90,
+  ease: "none",
+});
+//#endregion
+
 function resetSections() {
   activeSlide = 0;
   oldSlide = 0;

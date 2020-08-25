@@ -488,9 +488,7 @@ $cogs: 1, 2, 3, 4;
   section.photo-gallery {
     overflow-x: hidden;
     overflow-y: scroll;
-    position: relative;
-    top: -10px;
-    height: calc(100vh + 20px);
+    height: 100vh;
 
     .photo-gallery__wrapper {
       width: calc(5 * (100vw - 200px));
@@ -501,8 +499,10 @@ $cogs: 1, 2, 3, 4;
     }
     
     .photo-gallery__header, img {
+      position: relative;
+      top: -10px;
       width: calc(100vw - 200px);
-      min-height: 100%;
+      min-height: calc(100% + 20px);
       flex: 0 1 calc(100vw - 200px);
       object-fit: cover;
       display: flex;
@@ -520,6 +520,33 @@ $cogs: 1, 2, 3, 4;
         font-size: 40;
       }
     }
+  }
+
+  .car-scrub {
+
+    &__spacer {
+      height: 600vh;
+      position: relative;
+      overflow: hidden;
+    }
+
+    &__car-img {
+      width: 200px;
+      position: absolute;
+      z-index: 30;
+    }
+
+
+  }
+
+  .line {
+    width: 100%;
+    max-width: 800px;
+    height: 8px;
+    margin: 0 0 10px 0;
+    position: relative;
+    display: inline-block;
+    background-color: rgba(255,20,20,1);
   }
 
 }
